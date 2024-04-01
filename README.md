@@ -14,3 +14,6 @@ In general, in reinforcement learning, the posterior/PPO-optimal policy is intra
 
 Note that the BRAIn gradient estimate is a biased estimator of KL divergence between the Bayesian reward-conditioned posterior (PPO-optimal policy for BT reward models) and the training policy.
 However, it is an unbiased estimator of the self-normalized KL divergence between the same distributions as proved in Theorem 4.2. This novel divergence is $0$ if and only if the posterior equals the policy.
+
+Khalifa et al. A distributional approach to controllable text generation ICLR 2021
+Korbak et al. On Reinforcement Learning and Distribution Matching for Fine-Tuning Language Models with no Catastrophic Forgetting, Neurips 2022
