@@ -11,7 +11,7 @@ num_iterations = 2000
 sigma_squared = 1
 true_gradient = true_theta - policy_theta
 # Compute base model probabilities
-def compute_p_x(samples):
+def compute_posterior_x(samples):
     p_x = np.exp(-0.5 * (samples - true_theta)**2) / np.sqrt(2 * np.pi)
     return p_x
  
@@ -44,7 +44,7 @@ def estimator_dpg(proposal_theta):
     gradients = []
     for _ in range(num_iterations):
         samples = sample_from_proposal(proposal_theta, num_samples)
-        p_x = compute_p_x(samples)
+        p_x = compute_posterior_x(samples)
         proposal_x = compute_proposal_x(proposal_theta, samples)
         weights = (1/num_samples) * (p_x / proposal_x)
         grad = compute_gradients(samples, policy_theta)
@@ -58,7 +58,7 @@ def estimator_gdcpp(proposal_theta):
     gradients = []
     for _ in range(num_iterations):
         samples = sample_from_proposal(proposal_theta, num_samples)
-        p_x = compute_p_x(samples)
+        p_x = compute_posterior_x(samples)
         q_theta_x = compute_q_theta_x(samples)
         proposal_x = compute_proposal_x(proposal_theta, samples)
         weights = (1/num_samples) * (p_x / proposal_x - q_theta_x/proposal_x)
@@ -73,7 +73,7 @@ def estimator_brain(proposal_theta):
     gradients = []
     for _ in range(num_iterations):
         samples = sample_from_proposal(proposal_theta, num_samples)
-        p_x = compute_p_x(samples)
+        p_x = compute_posterior_x(samples)
         q_theta_x = compute_q_theta_x(samples)
         proposal_x = compute_proposal_x(proposal_theta, samples)
         alpha = p_x / proposal_x
@@ -106,6 +106,6 @@ plt.title('KL Divergence vs. Variance')
 plt.grid(True)
 
 # Save the graphs
-plt.savefig('proposal_mean_vs_variance.png')
+plt.savefig('proposal_vs_variance.png')
 
 print("Graphs have been saved.")

@@ -1,7 +1,7 @@
 # BRAIn_experiments
 Here, we run experiments to show that the variance of the BRAIn gradient estimate is quite low even when the proposal distribution is away from the Bayesian reward-conditioned posterior (or PPO-optimal policy).
 
-We consider a special case where the reward is uniform for all the samples and hence posterior/ppo-optimal policy $p(y|x, G=1)$ is the same as prior $p(y|x)$.
+We consider a special case where the posterior is a standard normal N(0,1). The training policy is N(1,1). The proposal is N(mu, 1), where mu linearly varies between 0 and 1.
 
 We consider the following 3 gradient estimators: 
 1) BRAIn without baseline. This is similar to DPG gradient estimator (see section 2.3 of Khalifa et al. ICLR 2021)
